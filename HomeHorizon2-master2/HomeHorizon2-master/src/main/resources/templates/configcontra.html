@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>actualizar password - HomeHorizon</title>
+    <link rel="stylesheet" href="../static/css/configcuentausuario.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alkalami&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="headerleft">
+        <div>
+          <img
+            src="../static/img/iconos-config/menu.png"
+            alt=""
+            height="35px"
+            width="35px"
+          />
+        </div>
+        <div>
+          <img src="../static/img/logos/01.png" alt="" height="40px" width="40px" />
+        </div>
+        <h2>HomeHorizon</h2>
+      </div>
+      <div class="headerright">
+        <img
+          src="../static/img/clientes/01.jpg"
+          alt="User Avatar"
+          height="40px"
+          width="40px"
+          class="imgperfil"
+        />
+        <div class="status-indicator"></div>
+      </div>
+    </header>
+    <div class="Configuraciones">
+      <img
+        src="../static/img/iconos-config/engranaje.png"
+        alt=""
+        height="70px"
+        width="70px"
+      />
+      <h3 class="confitexto">Configuraciones</h3>
+    </div>
+    <h3 class="actualizatexto">Cambiar contraseña</h3>
+    <form action="#" method="post">
+      <div class="contenedorformu">
+        <div class="form-section">
+          <label for="correoactual">Ingresa tu correo actual</label>
+          <input
+            type="email"
+            name="correoactual"
+            required
+          />
+          <label for="passwordactual">Contraseña actual</label>
+          <input type="password" name="passwordactual" required />
+        </div>
+
+        <div class="form-section">
+          <label for="passwordnueva">Contraseña nueva</label>
+          <input
+            type="password"
+            name="passwordnueva"
+            required
+          />
+          <label for="confirmpassword">Confirma tu contraseña</label>
+          <input type="password" name="confirmpassword" required />
+        </div>
+      </div>
+
+      <div class="contendorbtnenviar"><button type="submit" class="btnenviar">Guardar Cambios</button></div>
+    </form>
+  </body>
+</html>

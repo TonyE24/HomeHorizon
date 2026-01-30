@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeHorizon Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img th:src="@{/img/logos/01.png}" alt="HomeHorizon Logo">
+                <h2>Agente</h2>
+            </div>
+            <nav class="menu">
+                <a th:href="@{/Clientes}">Clientes</a>
+                <a th:href="@{/propiedad}">Propiedades</a>
+                <a th:href="@{/configuracionAgente}">Configuración</a>
+                <a th:href="@{/logout}">Cerrar sesión</a>
+                <h1>Bienvenido</span></h1>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header class="header">
+                <h2>Actividad reciente</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha y hora</th>
+                            <th>Actividad</th>
+                            <th>Usuario/Agente</th>
+                            <th>Detalles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>28/08/2024 10:15</td>
+                            <td>Nueva propiedad añadida</td>
+                            <td>Juan Pérez</td>
+                            <td>Casa en San Salvador, $250,000</td>
+                        </tr>
+                        <tr>
+                            <td>28/08/2024 09:45</td>
+                            <td>Cliente actualizado</td>
+                            <td>María López</td>
+                            <td>Datos de contacto modificados</td>
+                        </tr>
+                        <tr>
+                            <td>28/08/2024 09:15</td>
+                            <td>Reporte generado</td>
+                            <td>Sistema Automático</td>
+                            <td>Ventas del mes de agosto</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </header>
+
+            <section class="statistics">
+                <h2>Estadísticas</h2>
+                <div class="charts">
+                    <div class="chart">
+                        <h3>Ventas</h3>
+                        <canvas id="miGraficoPastel" width="300" height="400"></canvas>
+
+                    </div>
+                    <div class="chart">
+                        <h3>Nuevos clientes</h3>
+                        <canvas id="miGraficoBarras" width="300" height="300"></canvas>
+
+                    </div>
+                </div>
+                <div class="summary">
+                    <p>Ventas del mes: $1,200,000.00</p>
+                    <p>Propiedades disponibles: 128</p>
+                    <p>Nuevos clientes: 12</p>
+                    <p>Promedio de tiempo de venta: 38 días</p>
+                    <p>Promedio de valor de venta: $240,000.00</p>
+                    <p>Agente con más ventas: Mariana Gonzales - 12 ventas</p>
+                </div>
+                <button>Actualizar</button>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Datos iniciales
+        const datos = {
+            labels: ['juni', 'julo', 'agosto'],
+            datasets: [{
+                data: [30, 50, 20], // Valores iniciales
+                backgroundColor: ["#f7885e", '#a7d36b', '#b0f3f0'],
+            }]
+        };
+
+        // Crear el gráfico de pastel
+        const ctx = document.getElementById('miGraficoPastel').getContext('2d');
+        const miGraficoPastel = new Chart(ctx, {
+            type: 'pie',
+            data: datos
+        });
+
+        // Función para actualizar el gráfico dinámicamente
+        function actualizarGrafico(nuevosDatos) {
+            miGraficoPastel.data.datasets[0].data = nuevosDatos;
+            miGraficoPastel.update();
+        }
+
+        // Ejemplo de actualización de datos dinámicamente después de 3 segundos
+        setTimeout(() => {
+            const nuevosDatos = [40, 35, 25]; // Nuevos valores
+            actualizarGrafico(nuevosDatos);
+        }, 3000);
+    </script>
+
+    <script>
+        // Datos iniciales
+        const datosBarras = {
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
+            datasets: [{
+                label: 'Ventas',
+                data: [65, 59, 80, 81, 56], // Valores iniciales de las barras
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        // Crear el gráfico de barras
+        const ctd = document.getElementById('miGraficoBarras').getContext('2d');
+        const miGraficoBarras = new Chart(ctd, {
+            type: 'bar', // Tipo de gráfico: Barras
+            data: datosBarras,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true // Asegura que el eje Y comience en 0
+                    }
+                }
+            }
+        });
+
+        // Función para actualizar los valores de las barras dinámicamente
+        function actualizarGrafico(nuevosDatos) {
+            miGraficoBarras.data.datasets[0].data = nuevosDatos; // Actualiza los datos
+            miGraficoBarras.update(); // Redibuja el gráfico con los nuevos valores
+        }
+
+        // Ejemplo: actualizar los datos dinámicamente después de 5 segundos
+        setTimeout(() => {
+            const nuevosDatos = [75, 65, 90, 95, 60]; // Nuevos valores
+            actualizarGrafico(nuevosDatos); // Actualiza el gráfico
+        }, 5000);
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>Construyendo Sueños, Creando Hogares</p>
+            <p>No solo gestionamos propiedades, sino también ayudamos a las personas a encontrar y crear sus hogares
+                ideales</p>
+        </div>
+        <div class="footer-contact">
+            <p>Email: HomeHorizonvt@gmail.com</p>
+            <p>Tel: (+503) 7616-2273</p>
+        </div>
+    </footer>
+</body>
+
+</html>

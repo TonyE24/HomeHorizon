@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agente - HomeHorizon</title>
+    <link rel="stylesheet" th:href="@{/css/agente.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="/js/agente.js" defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img th:src="@{/img/logos/01.png}" alt="HomeHorizon">
+                <h2><a th:href="@{/index}"></a>HomeHorizon</h2>
+            </div>
+
+            <!-- Menu lateral -->
+            <nav class="menu">
+                <a th:href="@{/agentes}">Agentes</a>
+                <a th:href="@{/reporte}">Reportes</a>
+                <a th:href="${gerente != null ? '/configuracion' : '/configuracionGerente'}">Configuración</a>
+                <a th:href="@{/logout}">Cerrar sesión</a>
+                <h1>Bienvenido</h1>
+            </nav>
+        </aside>
+
+        <div class="main-content">
+            <header class="header">
+                <div class="search-filter">
+                    <input type="text" placeholder="Buscar agente..." id="searchInput">
+                    <button id="searchButton">Buscar</button>
+                </div>
+            </header>
+
+            <!-- Tabla de Agentes -->
+            <section class="agent-list">
+                <h2>Agentes</h2>
+                <br>
+                <div class="table-container"> <!-- Corregido: eliminé el punto -->
+                    <table id="agentsTable">
+                        <thead>
+                            <tr>
+                                <th>id Usuario</th>
+                                <th>nombre</th>
+                                <th>apellido</th>
+                                <th>correo</th>
+                                <th>telefono</th>
+                                <th>fecha de ingreso</th>
+                                <th>zona</th>
+                                <th>Editar/Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="agente : ${listaagentes}">
+                                <td th:text="${agente.usuario.usuario_id}"></td>
+                                <td th:text="${agente.nombre}"></td>
+                                <td th:text="${agente.apellido}"></td>
+                                <td th:text="${agente.correo}"></td>
+                                <td th:text="${agente.telefono}"></td>
+                                <td th:text="${agente.fecha_ingreso}"></td>
+                                <td th:text="${agente.zona.zona}"></td>
+                                <td> <!-- Botón Editar -->
+                                    <a th:href="@{/agentes/editar/{id}(id=${agente.agente_id})}">
+                                        <button>Editar</button>
+                                    </a>
+
+                                    <!-- Botón Eliminar -->
+                                    <a th:href="@{/agentes/eliminar/{id}(id=${agente.agente_id})}"
+                                        onclick="return confirm('¿Estás seguro de eliminar este agente?');">
+                                        <button>Eliminar</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <a th:href="@{/agentes/crear}">
+                    <button class="btn-add">Agregar agente</button>
+                </a>
+                <hr>
+            </section>
+        </div>
+</body>
+
+</html>

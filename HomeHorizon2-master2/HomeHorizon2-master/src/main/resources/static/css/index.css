@@ -1,0 +1,161 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: "Raleway", sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    color: #333;
+    font-style: normal;
+}
+
+.container {
+    display: flex;
+    flex: 1;  /* Asegura que el contenedor ocupe todo el espacio disponible */
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #dff5df;
+    padding: 20px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+}
+
+/* Otras reglas de estilo se mantienen igual */
+
+
+.logo {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo img {
+    width: 125px;
+    height: 80px;
+}
+
+.menu a {
+    display: block;
+    padding: 15px 10px;
+    margin-bottom: 10px;
+    color: #555;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.menu a.active,
+.menu a:hover {
+    background-color: #023600; /* Verde oscuro en hover */
+    color: white;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.header h2 {
+    font-size: 24px;
+    color: #4CAF50;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th,
+table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.statistics {
+    margin-bottom: 40px;
+}
+
+.statistics h2 {
+    font-size: 24px;
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+
+.charts {
+    display: flex;
+    justify-content:space-around;
+    margin-bottom: 20px;
+}
+
+.chart img {
+    width: 200px;
+    height: 200px;
+}
+
+.summary {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-content,
+.footer-contact {
+    max-width: 500px;
+}
+
+.footer-contact p {
+    margin: 5px 0;
+}

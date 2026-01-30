@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliente - HomeHorizon</title>
+    <link rel="stylesheet" th:href="@{/css/cliente.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img th:src="@{/img/logos/01.png}" alt="HomeHorizon Logo">
+                <h2>HomeHorizon</h2>
+            </div>
+
+            <!-- Menu lateral -->
+            <nav class="menu">
+                <a th:href="@{/Clientes}" >Clientes</a>
+                <a th:href="@{/propiedad}">Propiedades</a>
+                <a th:href="@{/configuracionAgente}" >Configuración</a>
+                <a href="/logout">Cerrar sesión</a>
+                <h1>Bienvenido</span></h1>
+            </nav>
+        </aside>
+
+        <div class="main-content">
+            <header class="header">
+                <div class="profile">
+                    <img th:src="@{/img/clientes/01.jpg}" alt="User Avatar" class="avatar">
+                    <div class="status-indicator"></div>
+                </div>
+            </header>
+
+            <!-- Detalle del Cliente   -->
+            <section class="client-details">
+                <div class="client-info">
+                    <div class="details">
+                        <h2 th:text="${cliente.nombre + ' ' + cliente.apellido}"></h2> <hr><br>
+                        <p><strong>Email:</strong> <p th:text="${cliente.correo}"></p></p> <br>
+                        <p><strong>Teléfono:</strong> <p th:text="${cliente.telefono}"></p></p> <br>
+
+                        <h4>Preferencias:</h4>
+                        <div class="descripcion">
+                            <div class="preferences">
+                                <p><strong>Tipo de propiedad:</strong> <p th:text="${preferencia.tipoPropiedad}"></p></p> <hr> <br>
+                                <p><strong>Presupuesto:</strong> <p th:text="${preferencia.presupuesto}"></p></p> <hr><br>
+                                <p><strong>Ubicación preferida:</strong> <p th:text="${preferencia.ubicacion}"></p></p> <hr><br>
+                            </div>
+    
+                            <div class="client-status">
+                                <p><strong>Estado:</strong> 
+                                    <input type="checkbox" th:checked="${cliente.estado}" disabled>
+                                 </p> <hr> <br>
+                                <p><strong>Fecha de registro:</strong> <p th:text="${cliente.fecha_registro}"></p></p> <hr> <br>
+                                <p><strong>Agente asignado:</strong> <p th:text="${cliente.agente.nombre} + ' ' + ${cliente.agente.apellido}"></p></p> <hr> <br>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                <div class="agent-notes">  
+                    
+                    <div class="area-details1">
+                        <div class="area-details" style="margin-right: 20px;">
+                            <br>
+                            <h4>Comentarios:</h4> <br>
+                            <textarea th:text="${preferencia.comentario}" disabled></textarea>
+                        </div>
+                    </div>  
+                    <div class="btn-finale"> <br><br><br>
+                        <button class="btn-appointment">Agendar Cita</button> <br>
+                        <a class="edit-button" th:href="@{/mdCliente/{cliente_id}(cliente_id=${cliente.cliente_id})}">Modificar</a>
+                    </div>
+                </div>  
+            </section>
+        </div>
+    </div>
+
+    
+</body>
+
+</html>

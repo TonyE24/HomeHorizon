@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-BienesraicesApplication<bienesraices>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.homehorizon.bienesraices.BienesraicesApplication",
+            "projectName": "bienesraices",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

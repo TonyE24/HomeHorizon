@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Reportes - HomeHorizon </title>
+    <link rel="stylesheet" th:href="@{/css/reporte.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+     
+</head>
+<body>
+    <div class="container">
+     <!-- Barra lateral -->
+       <aside class="sidebar">
+            <div class="logo">
+               <img src="img/logos/01.png" alt="HomeHorizon">
+               <h1>HomeHorizon</h1>
+            </div>
+            <nav class="menu">
+                <a href="cliente.html">Clientes</a>
+                <a href="propiedades.html">Propiedades</a>
+                <a href="agente.html">Agentes</a>
+                <a href="reporte.html" class="active">Reportes</a>
+                <a href="configuracion.html">Configuración</a>
+                <a href="login.html">Cerrar sesión</a>
+            </nav>
+        </aside>
+
+       <!-- Contenido principal -->
+       <main class="main-content">
+          <header class="header">
+             <div class="search-bar">
+                <form class="form-inline"  method="get" >
+                <input type="text" name="palabra" class="form-control" id="palabra" th:value="${palabra}" placeholder="Buscar..." >
+                <input type="submit" class="btn btn-primary mb2" value="Buscar">
+                &nbsp;&nbsp;
+                <input type="button" class="filter-button" value="Limpiar" onclick="limpiarCampos()"></input>
+                &nbsp;
+            </form>
+               
+             </div>
+             <div class="profile">
+                <img src="img/clientes/01.jpg" alt="Perfil">
+                <div class="status-indicator"></div>
+                <!--<span class="notification-icon">🔔</span> --> 
+             </div>
+          </header>
+
+         <div class="reports-container">
+            <!-- Filtros y opciones -->
+            <div class="filters">
+                <select class="category-filter">
+                    <option>Categoría</option>
+                    <option>Opción 1</option>
+                    <option>Opción 2</option>
+                </select>
+                <button class="filter-button">Filtrar</button>
+                <button class="clear-button">Limpiar filtros</button>
+            </div>
+
+           
+            <!-- Comentarios -->
+            
+            <div id="historialTransacciones">
+                <div>
+                    <h2 th:text="'Historial de Transacciones del Cliente ID: ' + ${clienteId}">Historial de Transacciones</h2>
+                <input type="button" class="filter-button" value="Limpiar" onclick="limpiarCampos()"></input>
+
+                </div>
+                <div th:fragment="historial">
+                <table>
+                    <thead>
+                        <tr>
+                            <th> ID cliente</th>
+                          <th> Id transaccione</th>
+                          <th>Id propiedad</th>
+                          <th>Id Agente</th>
+                          <th> Tipo </th>
+                          <th> Precio final</th>
+                          <th> Detalle</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="tablaTransacciones">
+
+                        <tr th:each="info : ${infoCliente}">
+                            <td th:text="${info.clienteId}"></td>
+                            <td th:text="${info.transaccionId}"></td>
+                            <td th:text="${info.propiedadId}"></td>
+                            <td th:text="${info.agenteId}"></td>
+                            <td th:text="${info.tipoTransaccion}"></td>
+                            <td th:text="${info.precioFinal}"></td>
+                            <td th:text="${info.detalle}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                 </div>
+                 <a th:href="@{/reportes}">Reportes</a>
+            </div>
+            
+            
+            
+
+            <!-- Botones de acciones -->
+            <div class="actions">
+                <button class="report-button">Reportar</button>
+                <button class="import-button">Importar</button>
+            </div>
+         </div>
+         
+
+           <!-- Pie de página
+           <footer class="footer">
+             <div class="footer-content">
+                <p>Construyendo Sueños, Creando Hogares</p>
+                <p>No solo gestionamos propiedades, sino también ayudamos a las personas a encontrar y crear sus hogares ideales</p>
+                <div class="footer-contact">
+                    <p>HomeHorizonSV@gmail.com | (503) 7616 - 2273</p>
+                </div>
+                <div class="footer-social">
+                    <a href="#">Twitter</a>
+                    <a href="#">Facebook</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">YouTube</a>
+                </div>
+             </div>
+            </footer>  -->
+       </main>
+    </div>
+
+    <script type="text/javascript">
+        function limpiarCampos(){
+            window.location='/';
+        }
+
+    </script>
+       <script type="text/javascript">
+        function clearTabla(){
+            var tabla= document.getElementById("tablaTransacciones");
+            while (tabla.firstChild) {
+            tabla.removeChild(tabla.firstChild);
+            }
+        }
+
+    </script>
+   
+   
+  
+    
+</body>
+</html>
+
+    

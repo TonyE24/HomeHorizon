@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editar Agente - HomeHorizon</title>
+  <link rel="stylesheet" href="/css/agentemodi.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/js/agentemodi.js" defer></script>
+</head>
+
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">
+        <img th:src="@{/img/logos/01.png}" alt="HomeHorizon">
+        <h2>HomeHorizon</h2>
+      </div>
+      <nav class="menu">
+        <a th:href="@{/agentes}">Agentes</a>
+        <a th:href="@{/reporte}">Reportes</a>
+        <a th:href="${gerente != null ? '/configuracion' : '/configuracionGerente'}">Configuración</a>
+        <a th:href="@{/logout}">Cerrar sesión</a>
+        <h1>Bienvenido</h1>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="header">
+        <div class="profile">
+          <img src="/img/clientes/01.jpg" alt="Foto de perfil del usuario" />
+          <div class="status-indicator"></div>
+        </div>
+      </header>
+
+      <section class="edit-section">
+        <h1>Información del Agente</h1>
+        <form class="form-container" th:action="@{/agentes/guardar}" method="POST" th:object="${nuevoagente}">
+          <div class="form-fields">
+            <div class="form-row">
+              <legend>Datos de usuario:</legend>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="usuario">Usuario:</label>
+                <input type="text" id="usuario" th:field="*{usuario.usuario}" required />
+              </div>
+              <div class="form-group">
+                <label for="contraseña">Contraseña:</label>
+                <input type="password" id="contraseña" th:field="*{usuario.contraseña}" required />
+              </div>
+              <div class="form-group">
+                <label for="estadoActivo">Estado:</label>
+                <input type="checkbox" id="estadoActivo" th:field="*{usuario.estado}" required />
+              </div>
+              <div class="form-group">
+                <label for="tipodeusuario">Tipo de usuario:</label>
+                <select id="tipodeusuario" th:field="*{usuario.tipoUsuario.tipoUserID}" required>
+                  <option th:each="tipo : ${tipousuario}" th:value="${tipo.tipoUserID}" th:text="${tipo.tipoUsuario}">
+                    Selecciona un usuario</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <input type="hidden" id="agente_id" th:field="*{agente_id}">
+            </div>
+            <div class="form-row">
+              <legend>Datos de agente:</legend>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" th:field="*{nombre}" required />
+              </div>
+              <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" th:field="*{apellido}" required />
+              </div>
+              <div class="form-group">
+                <label for="correo">Correo:</label>
+                <input type="email" id="correo" th:field="*{correo}" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" th:field="*{telefono}" required />
+              </div>
+              <div class="form-group">
+                <label for="fecha_ingreso">Fecha de Ingreso:</label>
+                <input type="date" id="fecha_ingreso" th:field="*{fecha_ingreso}" required />
+              </div>
+              <div class="form-group">
+                <label for="zona_id">Zona:</label>
+                <select id="zona_id" th:field="*{zona.zonaID}" required>
+                  <option th:each="zona : ${zonas}" th:value="${zona.zonaID}" th:text="${zona.zona}">Selecciona una zona
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <button type="submit" class="save-btn">Guardar</button>
+            </div>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+</body>
+
+</html>

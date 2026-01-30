@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambio de contraseña - HomeHorizon</title>
+    <link rel="stylesheet" th:href="@{/css/configuracion.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img th:src="@{/img/logos/01.png}" alt="HomeHorizon Logo">
+                <h2>HomeHorizon</h2>
+            </div>
+
+            <!-- Menu lateral -->
+            <nav class="menu">
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div>
+                <p th:if="${mensaje}" th:text="${mensaje}" style="color: green;"></p>
+                <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+            </div>
+        
+            <!-- Formulario para verificar la contraseña actual -->
+            <form method="POST" action="/verificarContra" th:if="${session.contraVerificada == null}">
+                <section class="client-form">
+                    <h2>Verificar contraseña</h2>
+                    <div class="form-container">
+                        <div class="form-fields">
+                            <div class="form-row">
+                                <label for="contraseña">Contraseña actual:</label>
+                                <input type="password" id="contraseña" name="contraseña" required>
+                            </div>
+                            <div class="form-state">
+                                <button type="submit" class="btn btn-primary">Verificar</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </form>
+        
+            <!-- Formulario para cambiar la contraseña -->
+            <form method="POST" action="/cambioContra" th:if="${session.contraVerificada != null}">
+                <section class="client-form">
+                    <h2>Cambiar contraseña</h2>
+                    <div class="form-container">
+                        <div class="form-fields">
+                            <div class="form-row">
+                                <label for="Ncontraseña">Nueva contraseña:</label>
+                                <input type="password" id="Ncontraseña" name="Ncontraseña" required>
+                            </div>
+                            <div class="form-state">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </form>
+        </main>
+
+    </div>
+    <footer>
+        <div class="footer-content">
+            <p>Construyendo Sueños, Creando Hogares</p>
+            <p>No solo gestionamos propiedades, sino también ayudamos a las personas a encontrar y crear sus hogares ideales</p>
+        </div>
+        <div class="footer-contact">
+            <p>Email: HomeHorizonvt@gmail.com</p>
+            <p>Tel: (+503) 7616-2273</p>
+        </div>
+    </footer>
+</body>
+</html>
+

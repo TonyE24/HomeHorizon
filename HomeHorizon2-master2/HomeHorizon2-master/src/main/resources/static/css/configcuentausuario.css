@@ -1,0 +1,125 @@
+* {
+    padding   : 0;
+    margin    : 0;
+    box-sizing: border-box;
+}
+
+.header {
+    width           : 100%;
+    background-color: rgb(255, 255, 255);
+    display         : flex;
+    flex-direction  : row;
+    align-items     : center;
+    font-family     : "Bad Script", cursive;
+    font-weight     : 400;
+    font-style      : normal;
+    justify-content : space-between;
+    box-shadow      : 0 1px 1px rgb(220, 218, 218);
+    height          : 55px;
+}
+
+.headerleft {
+    display       : flex;
+    flex-direction: row;
+    align-items   : center;
+    margin-left   : 10px;
+}
+
+.headerright {
+    margin-right: 10px;
+}
+
+.imgperfil {
+    border-radius: 80px/80px;
+}
+
+.Configuraciones {
+    display     : flex;
+    height      : 150px;
+    align-items : center;
+    padding-left: 100px;
+}
+
+.confitexto {
+    padding-left: 30px;
+    color       : #879957;
+    font-size   : 50px;
+    font-family : "Bad Script", cursive;
+    font-weight : 900;
+    font-style  : normal;
+}
+
+.actualizatexto {
+    height     : 50pxs;
+    text-align : center;
+    font-size  : 40px;
+    font-family: "Bad Script", cursive;
+    font-weight: 500;
+    font-style : normal;
+}
+
+.contenedorformu {
+    display        : flex;
+    justify-content: space-between;
+    align-items    : flex-start;
+    gap            : 20px;
+    width          : 80%;
+    margin         : 0 auto;
+    padding        : 20px;
+}
+
+.form-section {
+    width           : 450px;
+    padding         : 20px;
+    border          : 1px solid #ddd;
+    background-color: #f9f9f9;
+    box-shadow      : 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    text-align: center;
+}
+
+input {
+    width        : 100%;
+    padding      : 10px;
+    margin-bottom: 10px;
+}
+
+label {
+    font-family: "Alkalami", system-ui;
+    font-weight: 400;
+    font-style : normal;
+}
+
+.contendorbtnenviar {
+    display        : flex;
+    justify-content: center;
+    height         : 40px;
+}
+
+.btnenviar {
+    font-family     : "Alkalami", system-ui;
+    font-weight     : 400;
+    font-style      : normal;
+    font-size       : 20px;
+    background-color: #879957;
+    padding         : 5px 5px;
+    color           : white;
+    border-radius   : 10px;
+    border          : none;
+}
+
+.dirpaginacontrasenia{
+display: flex;
+justify-content: center;
+height: 80px;
+font-size: 20px;
+padding-top: 60px;    font-family: "Alkalami", system-ui;
+font-weight: 400;
+font-style : normal;
+}
+
+.textcambiarcontra{
+    color: #379AE6;
+}

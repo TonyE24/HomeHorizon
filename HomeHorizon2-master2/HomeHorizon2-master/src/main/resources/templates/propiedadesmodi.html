@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propiedades - HomeHorizon </title>
+    <link rel="stylesheet" href="/css/agentemodi.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img th:src="@{/img/logos/01.png}" alt="HomeHorizon">
+                <h2>HomeHorizon</h2>
+            </div>
+            <nav class="menu">
+                <a th:href="@{/Clientes}" >Clientes</a>
+                <a th:href="@{/propiedad}">Propiedades</a>
+                <a th:href="@{/configuracionAgente}" >Configuración</a>
+                <a href="/logout">Cerrar sesión</a>
+                <h1>Bienvenido</span></h1>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <div class="profile">
+                    <div class="user-state-icon">
+                        <img src="/img/clientes/01.jpg" alt="User Profile">
+                        <div class="status-indicator"></div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Formulario de Modificación de la propiedad -->
+            <section class="property-form">
+                <h2>Editar</h2>
+                <div class="form-container">
+                    <section class="edit-section">
+                        <h1>Información de propiedades:</h1>
+                        <form class="form-container" th:action="@{/propiedad/guardar}" method="POST"
+                            th:object="${nuevapropiedad}">
+                            <div class="form-fields">
+                                <div class="form-row">
+                                    <legend>Datos de propiedad:</legend>
+                                </div>
+                                <div class="form-row">
+                                    <input type="hidden" id="propiedadId" th:field="*{propiedadId}">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="ubicacion">Ubicacion:</label>
+                                        <input type="text" id="ubicacion" th:field="*{ubicacion}" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tipopropiedad">Tipo de Propiedad:</label>
+                                        <select id="tipopropiedad" th:field="*{propiedadDescri.tipoPropi.tipoId}"
+                                            required>
+                                            <option th:each="tipo : ${listaTipoPropiedad}" th:value="${tipo.tipoId}"
+                                                th:text="${tipo.nombreTipo}">
+                                                Selecciona un tipo de propiedad</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="estadopropiedad">Estado:</label>
+                                        <select id="estadopropiedad" th:field="*{estadoPropiedad.estadoId}" required>
+                                            <option th:each="estado : ${listaEstadoPropiedad}"
+                                                th:value="${estado.estadoId}" th:text="${estado.nombreEstado}">
+                                                Selecciona un estado
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="fecharegistro">Fecha Registro:</label>
+                                        <input type="date" id="fecharegistro" th:field="*{fechaRegistro}" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Documento">Documento:</label>
+                                        <input type="file" id="Documento" th:field="*{documento}" required />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="numerohabitaciones">Numero de habitaciones:</label>
+                                        <input type="text" id="numerohabitaciones"
+                                            th:field="*{propiedadDescri.numHabitaciones}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="numerobaños">Numero de baños:</label>
+                                        <input type="text" id="numerobaños" th:field="*{propiedadDescri.numBaños}"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tamaño">Tamaño:</label>
+                                        <input type="text" id="tamaño" th:field="*{propiedadDescri.tamaño}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="precio">Precio:</label>
+                                        <input type="text" id="precio" th:field="*{propiedadDescri.monto}" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <legend>Detalles:</legend>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="garaje" style="margin-left: 150px;">Garaje:</label>
+                                        <input type="checkbox" id="garaje" th:field="*{propiedadDescri.garaje}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="piscina" style="margin-left: 150px;">Piscina:</label>
+                                        <input type="checkbox" id="piscina" th:field="*{propiedadDescri.piscina}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="jardin" style="margin-left: 150px;">Jardin:</label>
+                                        <input type="checkbox" id="jardin" th:field="*{propiedadDescri.jardin}" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="descripcion">Descripcion:</label>
+                                        <textarea id="descripcion" th:field="*{propiedadDescri.descripcion}" rows="8"
+                                            cols="50"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <button type="submit" class="save-btn">Guardar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+        </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Reportes - HomeHorizon </title>
+    <link rel="stylesheet" th:href="@{/css/reporte.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+     
+</head>
+<body>
+    <div class="container">
+     <!-- Barra lateral -->
+       <aside class="sidebar">
+            <div class="logo">
+                <img th:src="@{/img/logos/01.png}" alt="HomeHorizon">
+               <h1>HomeHorizon</h1>
+            </div>
+            <nav class="menu">
+                <a th:href="@{/agentes}">Agentes</a>
+                <a th:href="@{/reporte}">Reportes</a>
+                <a th:href="${gerente != null ? '/configuracion' : '/configuracionGerente'}">Configuración</a>
+                <a th:href="@{/logout}">Cerrar sesión</a>
+                <h1>Bienvenido</span></h1>
+            </nav>
+        </aside>
+
+       <!-- Contenido principal -->
+       <main class="main-content">
+       
+          <header class="header">
+            
+             <div class="profile">
+                <img src="img/clientes/01.jpg" alt="Perfil">
+                <div class="status-indicator"></div>
+                <!--<span class="notification-icon">🔔</span> --> 
+             </div>
+          </header>
+
+         <div class="reports-container">
+            <h2>Filtrar Propiedades</h2>
+            <!-- Filtros y opciones -->
+            <div class="filters">
+                <select class="category-filter">
+                    <option>Categoría</option>
+                    <option>Opción 1</option>
+                    <option>Opción 2</option>
+                </select>
+                <button class="filter-button">Filtrar</button>
+                <button class="clear-button">Limpiar filtros</button>
+            </div>
+
+            <div>
+                
+            
+                <div class="container mt-5" style="
+                    display: flex;
+                    width: 100%;
+                    flex-direction: row;
+                    flex-wrap: wrap;">
+                   
+            
+                    <!-- Formulario de Filtrado -->
+                    <form id="filterForm" method="GET" action="/filtrar" class="row g-3">
+                        <!-- Estado -->
+                        <div class="col-md-4">
+                            <label for="estado" class="form-label">Estado</label>
+                            <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado">
+                        </div>
+                        <!-- Dirección -->
+                        <div class="col-md-4">
+                            <label for="direccion" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección">
+                        </div>
+                        <!-- Ubicación -->
+                        <div class="col-md-4">
+                            <label for="ubicacion" class="form-label">Ubicación</label>
+                            <input type="text" class="form-control" id="ubicacion" name="ubicacion" placeholder="Ubicación">
+                        </div>
+                        <!-- Número de Habitaciones -->
+                        <div class="col-md-4">
+                            <label for="numHabitaciones" class="form-label">Número de Habitaciones</label>
+                            <input type="number" class="form-control" id="numHabitaciones" name="numHabitaciones" min="0" placeholder="Ej: 3">
+                        </div>
+                        <!-- Tamaño Mínimo -->
+                        <div class="col-md-4">
+                            <label for="tamañoMin" class="form-label">Tamaño Mínimo (m²)</label>
+                            <input type="number" class="form-control" id="tamañoMin" name="tamañoMin" min="0" step="0.1" placeholder="Ej: 50">
+                        </div>
+                        <!-- Tamaño Máximo -->
+                        <div class="col-md-4">
+                            <label for="tamañoMax" class="form-label">Tamaño Máximo (m²)</label>
+                            <input type="number" class="form-control" id="tamañoMax" name="tamañoMax" min="0" step="0.1" placeholder="Ej: 150">
+                        </div>
+                        <!-- Tiene Garaje -->
+                        <div class="col-md-4">
+                            <label for="tieneGarage" class="form-label">¿Tiene Garaje?</label>
+                            <select class="form-select" id="tieneGarage" name="tieneGarage">
+                                <option value="">Cualquiera</option>
+                                <option value="true">Sí</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                        <!-- Tiene Piscina -->
+                        <div class="col-md-4">
+                            <label for="tienePiscina" class="form-label">¿Tiene Piscina?</label>
+                            <select class="form-select" id="tienePiscina" name="tienePiscina">
+                                <option value="">Cualquiera</option>
+                                <option value="true">Sí</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                        <!-- Tiene Jardín -->
+                        <div class="col-md-4">
+                            <label for="tieneJardin" class="form-label">¿Tiene Jardín?</label>
+                            <select class="form-select" id="tieneJardin" name="tieneJardin">
+                                <option value="">Cualquiera</option>
+                                <option value="true">Sí</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                        <!-- Botones -->
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Filtrar</button>
+                            <button type="reset" class="btn btn-secondary">Limpiar</button>
+                        </div>
+                    </form>
+            
+                    <hr>
+            
+                </div>
+                
+                <!-- Tabla de Resultados -->
+                <div class="mt-4">
+                    <h2>Resultados</h2>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Estado</th>
+                                <th>Dirección</th>
+                                <th>Ubicación</th>
+                                <th>Habitaciones</th>
+                                <th>Tamaño (m²)</th>
+                                <th>Garaje</th>
+                                <th>Piscina</th>
+                                <th>Jardín</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Iteración de resultados con Thymeleaf -->
+                            <tr th:each="propiedad : ${propiedades}">
+                                <td th:text="${propiedad.propiedadId}">ID</td>
+                                <td th:text="${propiedad.estadoPropiedad.estadoId}">Estado</td>
+                                <td th:text="${propiedad.direccion}">Dirección</td>
+                                <td th:text="${propiedad.ubicacion}">Ubicación</td>
+                                <td th:text="${propiedad.propiedadDescripcioin.numHabitaciones}">Habitaciones</td>
+                                <td th:text="${propiedad.propiedadDescripcioin.tamaño}">Tamaño</td>
+                                <td th:text="${propiedad.propiedadDescripcioin.garaje ? 'Sí' : 'No'}">Garaje</td>
+                                <td th:text="${propiedad.propiedadDescripcioin.piscina ? 'Sí' : 'No'}">Piscina</td>
+                                <td th:text="${propiedad.propiedadDescripcioin.jardin ? 'Sí' : 'No'}">Jardín</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            
+
+            <!-- Botones de acciones -->
+            <div class="actions">
+                <button class="report-button">Reportar</button>
+                <button class="import-button">Importar</button>
+            </div>
+         </div>
+
+           <!-- Pie de página
+           <footer class="footer">
+             <div class="footer-content">
+                <p>Construyendo Sueños, Creando Hogares</p>
+                <p>No solo gestionamos propiedades, sino también ayudamos a las personas a encontrar y crear sus hogares ideales</p>
+                <div class="footer-contact">
+                    <p>HomeHorizonSV@gmail.com | (503) 7616 - 2273</p>
+                </div>
+                <div class="footer-social">
+                    <a href="#">Twitter</a>
+                    <a href="#">Facebook</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">YouTube</a>
+                </div>
+             </div>
+            </footer>  -->
+       </main>
+    </div>
+
+    <script type="text/javascript">
+        function limpiarCampos(){
+            window.location='/';
+        }
+
+    </script>
+       <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+    const button = document.getElementById("btn-transac");
+    const buttonSelect = document.getElementById("select-all");
+
+    // Event listener for the "Cargar transacciones" button
+    button.addEventListener("click", function (event) {
+        const checkboxes = document.querySelectorAll(".client-checkbox");
+        let isChecked = false;
+
+        // Iterate through checkboxes to see if any is checked
+        checkboxes.forEach(function (checkbox) {
+            if (checkbox.checked) {
+                isChecked = true;
+            }
+        });
+
+        // If no checkbox is selected, show an alert and prevent further action
+        if (!isChecked) {
+            alert("Por favor, seleccione al menos un cliente.");
+            event.preventDefault();
+        }
+    });
+
+    // Event listener for the "Select All" button
+    buttonSelect.addEventListener("click", function (event) {
+        event.stopPropagation();
+        const checkboxes = document.querySelectorAll(".client-checkbox");
+
+        // Select all checkboxes
+        checkboxes.forEach(function (checkbox) {
+            checkbox.checked = true;
+        });
+    });
+});
+
+
+   </script>
+   
+  
+    
+</body>
+</html>
+
+    

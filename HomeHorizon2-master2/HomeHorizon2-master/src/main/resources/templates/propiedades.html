@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propiedades - HomeHorizon</title>
+    <link rel="stylesheet" th:href="@{/css/propiedades.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img th:src="@{/img/logos/01.png}" alt="HomeHorizon">
+                <h1>HomeHorizon</h1>
+            </div>
+            <nav class="menu">
+                <a th:href="@{/Clientes}" >Clientes</a>
+                <a th:href="@{/propiedad}">Propiedades</a>
+                <a th:href="@{/configuracionAgente}">Configuración</a>
+                <a href="/logout">Cerrar sesión</a>
+                <h1>Bienvenido</span></h1>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar...">
+                    <select class="filter-dropdown">
+                        <option>Filtrar</option>
+                    </select>
+                </div>
+                <div class="profile">
+                    <img th:src="@{/img/clientes/01.jpg}" alt="Perfil">
+                    <div class="status-indicator"></div>
+                    <!--<span class="notification-icon">🔔</span> -->
+                </div>
+            </header>
+
+            <section class="properties-section">
+                <table class="properties-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tipo de propiedad</th>
+                            <th>Ubicación</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th>Fecha de publicación</th>
+                            <th>Editar/Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="propiedad : ${listapropiedades}">
+                            <td th:text="${propiedad.propiedadId}"></td>
+                            <td th:text="${propiedad.propiedadDescri.tipoPropi.nombreTipo}"></td>
+                            <td th:text="${propiedad.ubicacion}"></td>
+                            <td th:text="${propiedad.propiedadDescri.monto}"></td>
+                            <td th:text="${propiedad.estadoPropiedad.nombreEstado}"></td>
+                            <td th:text="${propiedad.fechaRegistro}"></td>
+                            <td>
+                                <a th:href="@{/propiedad/editar/{id}(id=${propiedad.propiedadId})}">
+                                    <button>Editar</button>
+                                </a>
+                                <a th:href="@{/propiedad/eliminar/{id}(id=${propiedad.propiedadId})}"
+                                    onclick="return confirm('¿Estás seguro de eliminar este agente?');">
+                                    <button>Eliminar</button>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a th:href="@{/propiedad/crear}">
+                    <button class="add-property-btn">Agregar nueva propiedad</button>
+                </a>
+
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

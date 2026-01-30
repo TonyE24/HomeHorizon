@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes - HomeHorizon</title>
+    <link rel="stylesheet" th:href="@{/css/clientemodi.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img th:src="@{/img/logos/01.png}" alt="HomeHorizon Logo">
+                <h2>HomeHorizon</h2>
+            </div>
+            <nav class="menu">
+                <a th:href="@{/Clientes}" >Clientes</a>
+                <a th:href="@{/propiedad}">Propiedades</a>
+                <a th:href="@{/configuracionAgente}" >Configuración</a>
+                <a href="/logout">Cerrar sesión</a>
+                <h1>Bienvenido</span></h1>
+            </nav>
+        </aside>
+
+        <div class="main-content">
+            <header class="header">
+                <h3>Cliente</h3>
+                <div class="profile">
+                    <img th:src="@{/img/clientes/01.jpg}" alt="User Avatar" >
+                    <div class="status-indicator"></div>
+                </div>
+            </header>
+            <hr>
+
+            <form method="POST" action="/guardarCliente">
+                <!-- Formulario de Modificación del Cliente -->
+                <section class="client-form">
+                    <br>
+                    <h2>Crear</h2>
+                    <div class="form-container">
+                        <div class="form-fields">
+                            <div class="form-row">
+                                <label for="nombres">Nombres:</label>
+                                <input type="text" id="nombres" name="nombre">
+                            </div>
+                            <div class="form-row">
+                                <label for="apellidos">Apellidos:</label>
+                                <input type="text" id="apellidos" name="apellido">
+                            </div>
+                            <div class="form-row">
+                                <label for="correo">Correo electrónico:</label>
+                                <input type="email" id="correo" name="correo">
+                            </div>
+                            <div class="form-row">
+                                <label for="telefono">Teléfono:</label>
+                                <input type="tel" id="telefono" name="telefono">
+                            </div>
+                            <div class="form-row">
+                                <label for="dui">DUI:</label>
+                                <input type="text" id="dui" name="dui">
+                            </div>
+                            <div class="form-row">
+                                <label for="fecha-registro">Fecha de registro:</label>
+                                <input type="date" id="fecha-registro" name="fecha_registro">
+                            </div>
+                            <div class="form-row">
+                                <label for="agente">Agente Asignado:</label>
+                                <select name="agente_asignado" id="agente_asignado">
+                                    <option value="">Selecciona un Agente</option>
+                                    <!-- Iterar sobre los agentes -->
+                                    <th:block th:each="agente : ${agentes}">
+                                        <option th:value="${agente.agente_id}" 
+                                                th:text="${agente.nombre} + ' ' + ${agente.apellido}">Agente</option>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div class="form-state">
+                                <label for="estado">Estado: </label>
+                                <input type="checkbox" id="estado" name="estado" checked>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <h2>Preferencias</h2>
+                    <div class="preferences">
+                        <div class="form-row triple-row">
+                            <label for="tipo-propiedad">Tipo de propiedad: </label>
+                            <select id="tipo-propiedad" name="tipo_propiedad">
+                                <option value="casa">Casa</option>
+                                <option value="apartamento">Apartamento</option>
+                                <option value="local-comercial">Local Comercial</option>
+                            </select>
+                            <label for="presupuesto">Presupuesto:</label>
+                            <input type="text" id="presupuesto" name="presupuesto">
+                            <label for="ubicacion-preferida">Ubicación preferida: </label>
+                            <input type="text" id="ubicacion-preferida" name="ubicacion">
+                        </div>
+                        <br><br>
+                        <div class="form-row">
+                            <label for="comentarios">Comentarios: </label>
+                            <textarea id="comentarios" name="comentario"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">Guardar</button>
+                    </div>
+                </section>
+            </form>
+            
+            
+        </div>
+    </div>
+</body>
+</html>

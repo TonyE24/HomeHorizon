@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - HomeHorizon</title>
+    <link rel="stylesheet" th:href="@{/css/configuracion.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img th:src="@{/img/logos/01.png}" alt="HomeHorizon Logo">
+                <h2>HomeHorizon</h2>
+            </div>
+
+            <!-- Menu lateral -->
+            <nav class="menu">
+                <a th:href="@{/Clientes}" >Clientes</a>
+                <a th:href="@{/propiedad}">Propiedades</a>
+                <a th:href="@{/configuracionAgente}" class="active">Configuración</a>
+                <a href="/logout">Cerrar sesión</a>
+                <h1>Bienvenido</span></h1>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+                <!-- PERFIL -->
+                <section class="client-form">
+                    <br>
+                    <h2>Informacion Personal</h2>
+                    <div class="form-container">
+                        <div class="form-fields">
+                            <div class="form-row">
+                                <label for="nombres">Nombres:</label>
+                                <input type="text" id="nombres" name="nombre" th:value="${agente.nombre}" disabled>
+                            </div>
+                            <div class="form-row">
+                                <label for="apellidos">Apellidos:</label>
+                                <input type="text" id="apellidos" name="apellido" th:value="${agente.apellido}" disabled>
+                            </div>
+                            <div class="form-row">
+                                <label for="correo">Correo electrónico:</label>
+                                <input type="email" id="correo" name="correo" th:value="${agente.correo}" disabled>
+                            </div>
+                            <div class="form-row">
+                                <label for="telefono">Teléfono:</label>
+                                <input type="tel" id="telefono" name="telefono" th:value="${agente.telefono}" disabled>
+                            </div>
+                            <div class="form-row">
+                                <label for="fecha-registro">Fecha de registro:</label>
+                                <input type="date" id="fecha-registro" name="fecha_registro" th:value="${#dates.format(agente.fecha_ingreso, 'yyyy-MM-dd')}" disabled>
+                            </div>
+                            <div class="form-row">
+                                <label for="zona">zona asignada:</label>
+                                <input type="text" id="zona" name="zona" th:value="${agente.zona.zona}" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <header class="header">
+                    <h1>Configuraciones</h1>
+                </header>
+    
+                <section class="config-options">
+                    <div class="option">
+                        <button>
+                            <a th:href="@{/cambioContra}">Cambio de contraseña</a>
+                        </button>
+                    </div>
+                </section>
+        </main>
+
+    </div>
+    <footer>
+        <div class="footer-content">
+            <p>Construyendo Sueños, Creando Hogares</p>
+            <p>No solo gestionamos propiedades, sino también ayudamos a las personas a encontrar y crear sus hogares ideales</p>
+        </div>
+        <div class="footer-contact">
+            <p>Email: HomeHorizonvt@gmail.com</p>
+            <p>Tel: (+503) 7616-2273</p>
+        </div>
+    </footer>
+</body>
+</html>
+

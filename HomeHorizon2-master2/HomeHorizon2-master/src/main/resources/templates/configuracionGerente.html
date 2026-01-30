@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - HomeHorizon</title>
+    <link rel="stylesheet" th:href="@{/css/configuracion.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img th:src="@{/img/logos/01.png}" alt="HomeHorizon Logo">
+                <h2>HomeHorizon</h2>
+            </div>
+
+            <!-- Menu lateral -->
+            <nav class="menu">
+                <a th:href="@{/agentes}">Agentes</a>
+                <a href="reporte.html">Reportes</a>
+                <a th:href="${gerente != null ? '/configuracion' : '/configuracionGerente'}" class="active">Configuración</a>
+                <a th:href="@{/logout}">Cerrar sesión</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <form method="POST" action="/gerentes/guardar">
+                <!-- PERFIL -->
+                <section class="client-form">
+                    <br>
+                    <h2>Crear</h2>
+                    <div class="form-container">
+                        <div class="form-fields">
+                            <div class="form-row">
+                                <label for="nombres">Nombres:</label>
+                                <input type="text" id="nombres" name="nombre">
+                            </div>
+                            <div class="form-row">
+                                <label for="apellidos">Apellidos:</label>
+                                <input type="text" id="apellidos" name="apellido">
+                            </div>
+                            <div class="form-row">
+                                <label for="correo">Correo electrónico:</label>
+                                <input type="email" id="correo" name="correo">
+                            </div>
+                            <div class="form-row">
+                                <label for="telefono">Teléfono:</label>
+                                <input type="tel" id="telefono" name="telefono">
+                            </div>
+                            <div class="form-row">
+                                <label for="fecha-registro">Fecha de registro:</label>
+                                <input type="date" id="fecha-registro" name="fecha_registro">
+                            </div>
+
+                            <div class="form-state">
+                                <label for="estado">Estado: </label>
+                                <input type="checkbox" id="estado" name="estado" checked>
+                            </div>
+                            <div class="form-row">
+                                <label for="zona">zona asignada:</label>
+                                <select name="zonaId" id="zona" required>
+                                    <option value="">Seleccione una zona</option>
+                                    <th:block th:each="zona : ${zonas}">
+                                        <option th:value="${zona.zonaID}" th:text="${zona.zona}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div class="form-state">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </form>
+        </main>
+
+    </div>
+    <footer>
+        <div class="footer-content">
+            <p>Construyendo Sueños, Creando Hogares</p>
+            <p>No solo gestionamos propiedades, sino también ayudamos a las personas a encontrar y crear sus hogares ideales</p>
+        </div>
+        <div class="footer-contact">
+            <p>Email: HomeHorizonvt@gmail.com</p>
+            <p>Tel: (+503) 7616-2273</p>
+        </div>
+    </footer>
+</body>
+</html>
+
